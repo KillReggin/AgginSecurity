@@ -1,0 +1,511 @@
+/* Основные стили */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #dfe9f3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 800px;
+    height: 600px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+/* Боковая панель с чатами */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #34495e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: white;
+    position: relative;
+}
+
+.chat-item:hover {
+    background: #40576b;
+}
+
+.chat-item.active {
+    background: #1abc9c;
+}
+
+.chat-item.unread {
+    background: #40576b;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-info {
+    flex: 1;
+}
+
+.chat-info strong {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.chat-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #ecf0f1;
+}
+
+.unread-dot {
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Основное окно чата */
+.main-chat {
+    position: relative; /* Важно! */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background: #1abc9c;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-icon {
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.settings-icon:hover {
+    color: #16a085;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #ecf0f1;
+    max-height: calc(100% - 120px);
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Изменяем направление на вертикальное */
+    align-items: flex-start; /* Выравниваем текст по левому краю */
+}
+
+.message strong {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px; /* Добавляем отступ между именем и текстом */
+    color: #2c3e50;
+}
+
+.message p {
+    margin: 0; /* Убираем лишние отступы */
+    font-size: 14px;
+    color: #555;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    align-self: flex-end; /* Время сообщения выравниваем по правому краю */
+}
+
+.date-divider {
+    text-align: center;
+    margin: 10px 0;
+    color: #888;
+    font-size: 12px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    align-items: center;
+}
+
+.file-input-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.attach-button {
+    cursor: pointer;
+    font-size: 18px;
+    color: #1abc9c;
+    transition: color 0.3s;
+}
+
+.attach-button:hover {
+    color: #16a085;
+}
+
+#file-name {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+}
+
+#send-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#send-button:hover {
+    background: #16a085;
+}
+
+.chat-warning {
+    display: none;
+    padding: 10px;
+    background: #e74c3c;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    bottom: 140px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    border-radius: 5px;
+    width: 300px;
+}
+
+/* Окно настроек */
+.settings-sidebar {
+    width: 300px;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    right: -300px;
+    transition: right 0.3s;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.settings-sidebar.open {
+    right: 0;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #4EDEC1;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+}
+
+.settings-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#close-settings {
+    background: none;
+    border: none;
+    color: #2c3e50;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#close-settings:hover {
+    color: #1abc9c;
+}
+
+.settings-content {
+    padding: 15px;
+}
+
+.notifications-tab {
+    margin-top: 10px;
+    height: 300px; 
+    overflow-y: auto; 
+}
+
+.notifications-tab h4 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.notifications-tab ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notifications-tab li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+.admin-panel-button {
+    width: 100%;
+    padding: 10px;
+    background: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 160px; 
+}
+
+.admin-panel-button:hover {
+    background: #16a085;
+}
+
+
+.admin-panel {
+    width: 400px;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    right: -400px;
+    transition: right 0.3s;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-panel.open {
+    right: 0;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #4EDEC1;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#close-admin-panel {
+    background: none;
+    border: none;
+    color: #2c3e50;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#close-admin-panel:hover {
+    color: #1abc9c;
+}
+
+.admin-tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-tab {
+    padding: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #2c3e50;
+    transition: color 0.3s;
+}
+
+.admin-tab.active {
+    color: #1abc9c;
+    border-bottom: 2px solid #1abc9c;
+}
+
+.admin-tab:hover {
+    color: #1abc9c;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.admin-tab-content {
+    display: none;
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+#analytics-chart {
+    max-width: 100%;
+    height: auto;
+}
+
+#messages-chart {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+#message-logs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#message-logs-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+.filter-rules {
+    margin-top: 20px;
+}
+
+#filter-rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#filter-rules-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#filter-rules-list li button {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#new-filter-rule {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#add-filter-rule {
+    width: 100%;
+    padding: 10px;
+    background: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#add-filter-rule:hover {
+    background: #16a085;
+}
+
+/* Добавленные стили для заблокированных сообщений и логов */
+.blocked-message {
+    background-color: #ffebee;
+    border: 1px solid #e57373;
+    color: #c62828;
+}
+
+.blocked-log {
+    color: #c62828; 
+    font-weight: bold; 
+    background-color: #ffebee; 
+    border-left: 3px solid #c62828; 
+    padding-left: 10px; 
+}
